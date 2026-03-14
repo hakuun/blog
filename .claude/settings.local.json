@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:thoughtworks.medium.com)",
+      "WebSearch",
+      "Bash(claude mcp:*)",
+      "Bash(curl -s \"https://thoughtworks.medium.com/spec-driven-development-d85995a81387\" | head -200)",
+      "Bash(curl -sL \"https://thoughtworks.medium.com/spec-driven-development-d85995a81387\" 2>&1 | grep -o '<article[^>]*>.*</article>' | head -100 || echo \"Could not extract article\")",
+      "Read(//c/Users/Admin/**)",
+      "Bash(npx skills:*)"
+    ]
+  }
+}
