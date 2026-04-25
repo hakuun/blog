@@ -2,7 +2,6 @@
 title: '游戏用语为何"血洗"中文互联网'
 description: '从"对线"到"破防"，从"带节奏"到"0帧起手"，游戏术语如何一步步入侵我们的日常语言'
 pubDate: 'Jan 23 2025'
-heroImage: '../../assets/blog-placeholder-3.jpg'
 ---
 
 你有没有发现，越来越多的人在日常对话中使用游戏用语？

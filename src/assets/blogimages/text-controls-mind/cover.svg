@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">你的文字正在悄悄控制你的大脑</title>
+  <desc id="desc">文字、脑部轮廓和认知路径组成的原创封面图</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8f2e8"/>
+      <stop offset="1" stop-color="#dce7ff"/>
+    </linearGradient>
+    <linearGradient id="ink" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1b2945"/>
+      <stop offset="1" stop-color="#4f46e5"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="28" stdDeviation="28" flood-color="#23345f" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <g opacity="0.2" stroke="#24324f" stroke-width="2">
+    <path d="M0 150C260 80 410 230 650 160S1070 60 1600 150" fill="none"/>
+    <path d="M0 740C250 820 470 690 710 760S1120 850 1600 735" fill="none"/>
+  </g>
+  <g transform="translate(330 150)" filter="url(#soft)">
+    <rect x="0" y="0" width="940" height="600" rx="46" fill="#fffaf2"/>
+    <path d="M145 122h650M145 196h520M145 270h615M145 344h420M145 418h560" stroke="#d2c5aa" stroke-width="16" stroke-linecap="round"/>
+    <g transform="translate(515 122)">
+      <path d="M172 28c-86-36-186 15-206 105-76 17-121 93-94 165 25 67 97 96 162 72 42 51 121 59 174 17 45 18 100 1 126-40 69 8 128-45 128-112 0-56-38-103-90-116-24-65-94-102-200-91z" fill="#eef1ff" stroke="url(#ink)" stroke-width="10"/>
+      <path d="M96 166c58-28 103-14 133 33M226 95c-15 58 3 99 54 124M62 260c63-9 113 12 150 63M260 304c43-39 92-48 149-27" fill="none" stroke="#4f46e5" stroke-opacity="0.55" stroke-width="8" stroke-linecap="round"/>
+    </g>
+  </g>
+  <g font-family="Inter, 'Microsoft YaHei', 'PingFang SC', sans-serif" font-weight="800">
+    <text x="112" y="144" fill="#1b2945" font-size="64">文字</text>
+    <text x="111" y="220" fill="#4f46e5" font-size="64">不是标签</text>
+    <text x="111" y="296" fill="#1b2945" font-size="64">是脚手架</text>
+  </g>
+  <g font-family="Inter, 'Microsoft YaHei', 'PingFang SC', sans-serif" font-weight="700" fill="#1b2945" fill-opacity="0.56" font-size="36">
+    <text x="116" y="690">码农</text>
+    <text x="250" y="740">牛马</text>
+    <text x="1160" y="690">大语言模型</text>
+    <text x="1098" y="744">大文字模型</text>
+  </g>
+</svg>

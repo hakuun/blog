@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content'
 import FormattedDate from '../components/FormattedDate.astro'
-import type { MarkdownHeading, ImageMetadata } from 'astro'
+import type { MarkdownHeading } from 'astro'
 import TableOfContents from '../components/TableOfContents.astro'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
@@ -27,14 +27,18 @@ const {
 
 import BaseLayout from './BaseLayout.astro'
 import { REPOSITORY_URL } from '../consts'
-import { Image } from 'astro:assets'
 import { Icon } from 'astro-icon/components'
 
-const blogImages = import.meta.glob<{ default: ImageMetadata }>(
-	'/src/assets/blogimages/**/*.{jpeg,jpg,png,gif}'
+const coverImages = import.meta.glob<{ default: string }>(
+	'/src/assets/blogimages/**/cover.svg',
+	{
+		eager: true,
+		query: '?url',
+	}
 )
 
-const coverImagePath = `/src/assets/blogimages/${slug}/cover.jpg`
+const coverImagePath = `/src/assets/blogimages/${slug}/cover.svg`
+const coverImage = coverImages[coverImagePath]?.default
 
 const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
 	.utc()
@@ -91,13 +95,9 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
 						</div>
 
 						{
-							blogImages[coverImagePath] && (
+							coverImage && (
 								<>
-									<Image
-										src={blogImages[coverImagePath]()}
-										alt={title}
-										class="rounded-lg"
-									/>
+									<img src={coverImage} alt={title} class="rounded-lg" />
 									{coverImageCredit && (
 										<p class="mt-2 mb-8 opacity-80 italic text-sm">
 											图片来源：{coverImageCredit}

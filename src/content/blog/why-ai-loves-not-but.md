@@ -2,7 +2,6 @@
 title: 为什么 AI 这么爱说“不是……而是……”
 description: 从“不是……而是……”这个高频句式出发，聊聊 AI 味如何形成，以及它怎样反过来影响人类的表达习惯。
 pubDate: 2026-04-25
-heroImage: "../../assets/blog-placeholder-2.jpg"
 ---
 
 这不是一个简单的语言习惯，而是一种表达策略。
