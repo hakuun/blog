@@ -2,7 +2,11 @@
 // You can import this data from anywhere in your site by using the `import` keyword.
 
 export const SITE_TITLE = 'Hakuun Blog'
-export const SITE_DESCRIPTION = '我的个人博客，记录 AI、编程和思考'
+export const SITE_DESCRIPTION = '记录 AI、编程与思考的个人博客'
+export const AUTHOR_NAME = 'Hakuun'
+export const AUTHOR_EMAIL = 'a888888hhb@outlook.com'
+export const GITHUB_URL = 'https://github.com/hakuun'
+export const REPOSITORY_URL = 'https://github.com/hakuun/blog'
 
 // If you deploy to a subdirectory, set the `WEBSITE_BASE` here.
 // e.g. '/blog' if you are deploying to example.com/blog
@@ -12,25 +16,17 @@ export const SITE_BASE = '/blog'
 export const SocialLinks = [
 	{
 		name: 'GitHub',
-		url: 'https://github.com/yashjawale',
+		url: GITHUB_URL,
 	},
 	{
-		name: 'LinkedIn',
-		url: 'https://www.linkedin.com/in/yashjawale/',
-	},
-	{
-		name: 'X / Twitter',
-		url: 'https://twitter.com/imyashjawale',
-	},
-	{
-		name: 'Instagram',
-		url: 'https://instagram.com/imyashjawale',
+		name: 'Email',
+		url: `mailto:${AUTHOR_EMAIL}`,
 	},
 ]
 
 export const WebsiteLinks = [
 	{
-		name: 'Home',
+		name: '首页',
 		url: '',
 	},
 	{

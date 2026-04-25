@@ -26,6 +26,7 @@ const {
 } = Astro.props
 
 import BaseLayout from './BaseLayout.astro'
+import { REPOSITORY_URL } from '../consts'
 import { Image } from 'astro:assets'
 import { Icon } from 'astro-icon/components'
 
@@ -74,7 +75,7 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
 											name="mdi:calendar-refresh-outline"
 											class="inline-block text-primary dark:text-primary-dark"
 										/>
-										Last updated on <FormattedDate date={updatedDate} />
+										更新于 <FormattedDate date={updatedDate} />
 									</span>
 								)
 							}
@@ -99,7 +100,7 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
 									/>
 									{coverImageCredit && (
 										<p class="mt-2 mb-8 opacity-80 italic text-sm">
-											Image Credit: {coverImageCredit}
+											图片来源：{coverImageCredit}
 										</p>
 									)}
 								</>
@@ -115,7 +116,7 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
 					<!-- Suggest edit -->
 					<div class="flex justify-between mt-16 gap-4 flex-wrap italic">
 						<a
-							href={`https://github.com/yashjawale/yashjawale.github.io/edit/main/src/content/blog/${slug}.md`}
+							href={`${REPOSITORY_URL}/edit/main/src/content/blog/${slug}.md`}
 							target="_blank"
 							rel="noopener noreferrer"
 							class="hover:underline underline-offset-4 opacity-70 hover:opacity-100"

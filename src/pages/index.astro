@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import { SITE_BASE, SocialLinks } from '../consts'
+import { AUTHOR_EMAIL, SITE_BASE, SocialLinks } from '../consts'
 import { Icon } from 'astro-icon/components'
 import BlogCard from '../components/BlogCard.astro'
 import { getCollection } from 'astro:content'
@@ -16,10 +16,10 @@ const posts = (await getCollection('blog'))
 	>
 		<div>
 			<p class="block text-3xl opacity-70 mt-9 mb-4">Welcome to</p>
-			<h1 class="text-8xl font-bold leading-none">Saral Theme</h1>
+			<h1 class="text-8xl font-bold leading-none">Hakuun Blog</h1>
 		</div>
 		<p class="text-2xl max-w-2xl font-light leading-normal">
-			A simple theme for personal blog sites, created for Astro framework.
+			记录 AI、编程与思考，也记录把想法变成作品的过程。
 		</p>
 		<div class="flex flex-wrap gap-8">
 			{
@@ -36,48 +36,37 @@ const posts = (await getCollection('blog'))
 		</div>
 	</main>
 
-	<!-- Recent Posts Section -->
 	<section class="app-container">
 		<h2 class="section-title">Recent Posts</h2>
 		<div class="posts-grid-container">
 			{posts.map((post) => <BlogCard post={post} />)}
 		</div>
 		<a class="btn-secondary" href={`${SITE_BASE}/blog`}
-			>Read All
+			>阅读全部
 			<Icon size={20} name="mdi:arrow-right" />
 		</a>
 	</section>
 
-	<!-- Recent Posts Section -->
 	<section class="app-container py-42 grid lg:grid-cols-2 gap-28 lg:gap-10">
 		<div class="space-y-6">
 			<h2 class="section-title">About Me</h2>
 			<p class="text-lg max-w-xl pb-4">
-				A brief introduction about yourself. You can include your profession,
-				hobbies, interests, or anything you'd like visitors to know about you.
+				你好，我是 Hakuun。这里会沉淀我关于 AI、编程、产品与日常思考的笔记。
 			</p>
 			<a class="btn-secondary" href={`${SITE_BASE}/about`}
-				>Go to About
+				>了解更多
 				<Icon size={20} name="mdi:arrow-right" />
 			</a>
 		</div>
 		<div class="space-y-6">
 			<h2 class="section-title">Get in touch</h2>
 			<p class="text-lg max-w-xl">
-				Use the buttons below for my resume & email.
+				如果你想交流想法、文章或项目，可以通过邮箱联系我。
 			</p>
 			<div class="flex flex-wrap mt-auto space-x-4">
-				<a
-					class="btn-primary"
-					href="mailto:example@email.com"
-					download
-					target="_blank"
-					>Get in touch
+				<a class="btn-primary" href={`mailto:${AUTHOR_EMAIL}`} target="_blank"
+					>发邮件
 					<Icon height={20} name="mdi:email" />
-				</a>
-				<a class="btn-secondary" href="https://example.com" target="_blank"
-					>Download Resume
-					<Icon height={20} name="mdi:arrow-collapse-down" />
 				</a>
 			</div>
 		</div>
