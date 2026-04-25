@@ -2,7 +2,7 @@
 
 [![Built with Astro](https://astro.badg.es/v2/built-with-astro/tiny.svg)](https://astro.build)
 
-Hakuun 的个人博客，记录 AI、编程与思考。
+Hakuun 的个人博客，记录 AI、编程、产品与日常思考。
 
 ## Tech Stack
 
@@ -32,4 +32,4 @@ pnpm build
 
 ## License
 
-MIT. This project is based on the Saral Astro theme by Yash Jawale.
+MIT.
