@@ -26,7 +26,7 @@ export const SocialLinks = [
 
 export const WebsiteLinks = [
 	{
-		name: '首页',
+		name: 'Home',
 		url: '',
 	},
 	{

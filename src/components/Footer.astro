@@ -25,7 +25,7 @@ const today = new Date()
 			<h3 class="font-semibold text-2xl">Links</h3>
 			<div class="flex flex-wrap gap-4 mt-4">
 				{
-					WebsiteLinks.filter((link) => link.name !== '首页').map((link) => (
+					WebsiteLinks.filter((link) => link.name !== 'Home').map((link) => (
 						<a
 							class="text-lg"
 							href={link.url}
@@ -68,7 +68,7 @@ const today = new Date()
 	<div class="app-container flex justify-between items-center pb-6 text-center">
 		<p class="text-left md:text-center w-full">
 			&copy; {today.getFullYear()}
-			{AUTHOR_NAME}. 源码在 <a
+			{AUTHOR_NAME}. Source code available on <a
 				class="underline"
 				href={REPOSITORY_URL}
 				target="_blank">GitHub</a
