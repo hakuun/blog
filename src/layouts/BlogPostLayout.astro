@@ -30,14 +30,14 @@ import { REPOSITORY_URL } from '../consts'
 import { Icon } from 'astro-icon/components'
 
 const coverImages = import.meta.glob<{ default: string }>(
-	'/src/assets/blogimages/**/cover.svg',
+	'/src/assets/blogimages/**/cover.png',
 	{
 		eager: true,
 		query: '?url',
 	}
 )
 
-const coverImagePath = `/src/assets/blogimages/${slug}/cover.svg`
+const coverImagePath = `/src/assets/blogimages/${slug}/cover.png`
 const coverImage = coverImages[coverImagePath]?.default
 
 const lastModified = dayjs(remarkPluginFrontmatter.lastModified)

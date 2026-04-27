@@ -4,14 +4,14 @@ import FormattedDate from './FormattedDate.astro'
 const { post } = Astro.props
 
 const coverImages = import.meta.glob<{ default: string }>(
-	'/src/assets/blogimages/**/cover.svg',
+	'/src/assets/blogimages/**/cover.png',
 	{
 		eager: true,
 		query: '?url',
 	}
 )
 
-const coverImagePath = `/src/assets/blogimages/${post.slug}/cover.svg`
+const coverImagePath = `/src/assets/blogimages/${post.slug}/cover.png`
 const coverImage = coverImages[coverImagePath]?.default
 ---
 
