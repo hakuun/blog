@@ -1,5 +1,5 @@
 ---
-title: 什么是SDD？一篇讲清楚规格驱动开发”
+title: 什么是SDD？一篇讲清楚规格驱动开发
 description: 2025年，AI辅助编程领域出现了一个新概念：SDD，全称 Spec-Driven Development，中文叫规格驱动开发。
 pubDate: 2026-03-12
 ---
