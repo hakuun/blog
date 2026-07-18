@@ -1,0 +1,35 @@
+More than 60 percent of Google searches in the United States now end without the user clicking on a link. We type a question, read an artificial-intelligence-generated summary of the results and leave with our answer.
+
+Google is hardly alone. Claude, ChatGPT and upstart competitors like Perplexity do roughly the same thing: They take a question and swiftly return an answer, compressing what used to be a meandering journey through the internet into an immediate arrival at your destination. The explorative phase of searches — clicking through links, stumbling onto unexpected pages, following a reference that leads to somewhere unplanned — is disappearing.
+
+For anyone who publishes on the internet, this is a troubling development, since it lowers website traffic and makes protecting and profiting from your intellectual property more difficult. But you might think it is good news for internet users. Could there be anything wrong with getting a reliable answer more quickly?
+
+There is. By shortening the time between asking a question and getting an answer, these tools are actually undermining curiosity — and paradoxically threatening our ability to understand the world.
+
+About a decade ago, I worked at Google. When I was there, we often measured the value of internet content based on factors that indicated user engagement, like clicks and scroll depth. The metric Google seemed to reward — people exploring — is precisely what its A.I. products are now designed to eliminate.
+
+I left Google to study neuroscience, and what I found in the research literature helps explain why the A.I. summary poses a danger to learning. Curiosity, it turns out, is not just an individual’s desire to find out discrete facts; it’s also a feature of our biology [designed](https://pmc.ncbi.nlm.nih.gov/articles/PMC4635443/) to help us learn more broadly. And it requires a specific condition: a gap between what you want to know and what you find out.
+
+Researchers have [found](https://pubmed.ncbi.nlm.nih.gov/25284006/) that people in a state of curiosity, while waiting for an answer to an intriguing question, remember unrelated information they encounter during that time far better than they otherwise would. In that study, the researchers also placed those people in brain scanners. They found that waiting for an answer activates reward circuits in the brain and readies the hippocampus to help create memories. Similar findings have been [reported](https://www.sciencedirect.com/science/chapter/bookseries/abs/pii/S0079612316300589?via%3Dihub) by other researchers in studies involving infants, older children and adults.
+
+In short, curiosity puts the entire brain into a mode of heightened receptivity — not just for the specific thing you want to know but also for everything around it. Curiosity opens a window, and while the window is open, learning deepens across the board.
+
+But the window stays open only as long as the question remains unanswered. When an A.I. summary answers your search query in three seconds, the window closes before curiosity can deepen. You get what you came for, but you also lose what would have turned curiosity into learning: the adjacent article you might have read, the resulting tangent you might have followed, the connection between two ideas with no obvious relationship.
+
+Researchers call this incidental learning, and it’s the mechanism behind many serendipitous discoveries. Scientific breakthroughs, artistic leaps, technological innovation — these rarely emerge from efficient retrieval of known information. They emerge from periods of undirected exploration, when people follow questions further than they need to and find things they weren’t expecting. When the physicists Arno Penzias and Robert Wilson detected a persistent hiss in their radio antenna in 1964, they could have written it off as equipment noise; instead, they kept asking what it might be, and they ended up discovering the radiation left over from the Big Bang.
+
+Our technology is increasingly treating the territory between the query and the answer as dead space to be eliminated, when that territory is where most of the learning actually happens. The danger is not that people will stop asking questions. It is that questions will become endpoints. The loss is not serious in any single case. But fewer detours and fewer unexpected discoveries will have a cumulative effect. Over time, people trained this way become better at extracting ready-made conclusions than building connections of their own.
+
+To be sure, nobody is forced to use these tools. People can still browse and wander, still follow a chain of links into unfamiliar territory. But the default architecture of our digital platforms will make this less likely.
+
+Unlike other social costs of technological design — for instance, the addictive behaviors fostered by the infinite scroll on social media feeds — the loss of open-ended curiosity is not going to spur a class-action lawsuit against tech companies or inspire regulators to intervene. A.I. companies that want to do right by their users will have to take action themselves. Instead of burying sources behind paraphrases and replacing 10 links with one summary, they could make different design choices. They could keep sources more visible. They could show competing explanations, instead of compressing them into one smooth paragraph. They could offer alternative search modes that reward exploration over speed.
+
+I hope my former colleagues at Google and the engineers building similar tools elsewhere take these suggestions to heart and that the industry develops best practices that protect curiosity rather than treat it as an afterthought. The space between a question and an answer has value, and that value should not be engineered away.
+
+The most important discoveries are often not the ones we set out to make. If we build a world that delivers only what is asked for, we will lose the capacity to discover what we didn’t know to ask.
+
+Anne-Laure Le Cunff is a researcher at the Institute of Psychiatry, Psychology and Neuroscience at King’s College London. She is the author of “Tiny Experiments: How to Live Freely in a Goal-Obsessed World.”
+
+_The Times is committed to publishing_ [_a diversity of letters_](https://www.nytimes.com/2019/01/31/opinion/letters/letters-to-editor-new-york-times-women.html) _to the editor. We’d like to hear what you think about this or any of our articles. Here are some_ [_tips_](https://help.nytimes.com/hc/en-us/articles/115014925288-How-to-submit-a-letter-to-the-editor)_. And here’s our email:_ [_letters@nytimes.com_](mailto:letters@nytimes.com)_._
+
+_Follow the New York Times Opinion section on_ [_Facebook_](https://www.facebook.com/nytopinion)_,_ [_Instagram_](https://www.instagram.com/nytopinion/)_,_ [_TikTok_](https://www.tiktok.com/@nytopinion)_,_ [_Bluesky_](https://bsky.app/profile/nytopinion.nytimes.com), [_WhatsApp_](https://www.whatsapp.com/channel/0029VaN8tdZ5vKAGNwXaED0M) _and_ [_Threads_](https://www.threads.net/@nytopinion)_._
