@@ -764,7 +764,7 @@
   </div>
   <div class="frame" style="padding-top:6vh">
     <div class="kicker" data-anim>第一站 · 查号码</div>
-    <h2 class="h-xl" style="font-size:5.2vw" data-anim>浏览器不认识"www.baidu.com"<br>只认 <span style="font-family:var(--mono); font-weight:500">110.242.68.66</span>。</h2>
+    <h2 class="h-xl" style="font-size:4.2vw" data-anim>把你认识的域名"www.baidu.com"<br>换成机器认识的 IP <span style="font-family:var(--mono); font-weight:500">"110.242.68.66"</span>。</h2>
 
     <div class="grid-2-7-5" style="margin-top:6vh; padding-top:0">
       <div style="display:flex; flex-direction:column; justify-content:space-between; gap:3vh">
@@ -1549,6 +1549,7 @@ window.__pptPresenter=(()=>{
   let renderedNoteId='',saveTimer=0,noteSize=Number(localStorage.getItem('guizang-ppt-note-size')||17),presenterFrameObserver=null;
   let elapsed=0,timerRunning=false,timerStartedAt=0,timedSlideIndex=idx,slideTimerStartedAt=0,slideElapsed=Array(total).fill(0);
   let rehearsalActive=false,presenterOverviewOn=false,lowPowerBeforePresenter=window.__lowPowerMode;
+  let pipeStep=-1; // 当前页管道动画已点亮到第几步（-1 = 未开始）
   let layoutMode=localStorage.getItem(storageKey('layout'))||'balanced';
   let autoEnabled=localStorage.getItem(storageKey('auto-enabled'))==='1';
   let autoGlobalSeconds=Math.max(0,Number(localStorage.getItem(storageKey('auto-seconds'))||0));
@@ -1735,7 +1736,7 @@ window.__pptPresenter=(()=>{
     document.getElementById('ppt-prev').onclick=()=>go(idx-1,{force:true});
     document.getElementById('ppt-grid').onclick=()=>togglePresenterOverview();
     document.getElementById('ppt-overview-close').onclick=()=>togglePresenterOverview(false);
-    document.getElementById('ppt-next').onclick=()=>go(idx+1,{force:true});
+    document.getElementById('ppt-next').onclick=()=>{if(!tryPipeAdvance())go(idx+1,{force:true});};
     document.getElementById('ppt-last').onclick=()=>go(idx===total-1?0:total-1,{force:true});
     document.getElementById('ppt-timer-toggle').onclick=toggleTimer;
     document.getElementById('ppt-timer-reset').onclick=resetTimer;
@@ -1761,7 +1762,7 @@ window.__pptPresenter=(()=>{
     if(currentFrame.dataset.slide!==String(idx))updatePreviewFrame(currentFrame,idx);
     if(nextFrame.dataset.slide!==String(next))updatePreviewFrame(nextFrame,next);
     document.getElementById('ppt-next-card').classList.toggle('is-end',idx===total-1);
-    document.getElementById('ppt-current-label').textContent=`${idx+1} / ${total}`;
+    updatePipeIndicator();
     document.getElementById('ppt-next-label').textContent=idx===total-1?'已到尾页':`${next+1} / ${total}`;
     document.getElementById('ppt-notes-title').textContent=n.title||`第 ${idx+1} 页`;
     document.getElementById('ppt-notes-purpose').textContent=n.purpose||'—';
@@ -1938,13 +1939,16 @@ window.__pptPresenter=(()=>{
     if(message.type==='laser'&&Number(message.index)===idx){audienceLaser=message.point||null;audienceLaserHideAt=Date.now()+650;renderInks();return;}
     if(message.type==='circle'&&Number(message.index)===idx&&message.circle){audienceCircles.push(message.circle);renderInks();return;}
     if(message.type==='clear'&&Number(message.index)===idx){audienceCircles=[];renderInks();return;}
+    if(message.type==='pipe'){window.__setPipeStep?.(Number(message.step));return;}
     if(message.type==='goto'||message.type==='ping'){
       if(message.type==='goto'){audienceCircles=Array.isArray(message.circles)?message.circles:[];applyAudienceScreen(message.screenMode);go(Number(message.index),{force:true});}
       emit({type:'ack',index:idx,seq:Number(message.seq)});
     }
   }
   function receivePreview(message){
-    if(!message||message.__guizangPptSync!==1||message.session!==session||message.role!=='presenter'||message.type!=='preview-goto')return;
+    if(!message||message.__guizangPptSync!==1||message.session!==session||message.role!=='presenter')return;
+    if(message.type==='pipe'){window.__setPipeStep?.(Number(message.step));return;}
+    if(message.type!=='preview-goto')return;
     go(Number(message.index),{force:true});
   }
   function sendGoto(force=false){
@@ -1983,7 +1987,27 @@ window.__pptPresenter=(()=>{
   }
   function initPreview(){mode='preview';document.body.classList.add('ppt-preview');window.__setLowPowerMode?.(true,{persist:false});addEventListener('message',e=>{if(e.source===parent)receivePreview(e.data);});}
   function onSlideChange(nextIndex){
-    if(mode!=='presenter')return;rollSlideTimer(nextIndex);circles=[];draftCircle=null;laserPoint=null;annotationPointerDown=false;armAutoAdvance();updateShell();sendGoto();
+    if(mode!=='presenter')return;pipeStep=-1;rollSlideTimer(nextIndex);circles=[];draftCircle=null;laserPoint=null;annotationPointerDown=false;armAutoAdvance();updateShell();sendGoto();
+  }
+  // 管道页逐步推进：当前页为 data-animate="pipeline" 且还有未点亮步骤时，
+  // 点亮下一步并同步观众窗口 + 演讲者预览；返回 true 表示已消费本次按键（不翻页）。
+  function tryPipeAdvance(){
+    const slide=slides[idx];
+    if(!slide||slide.dataset.animate!=='pipeline')return false;
+    const steps=slide.querySelectorAll('[data-anim="step"]').length;
+    if(pipeStep>=steps-1)return false;
+    pipeStep++;
+    emit({type:'pipe',step:pipeStep});
+    const cur=document.getElementById('ppt-current-frame');
+    try{cur?.contentWindow?.postMessage({__guizangPptSync:1,session,role:'presenter',type:'pipe',step:pipeStep},'*');}catch(e){}
+    updatePipeIndicator();
+    return true;
+  }
+  function updatePipeIndicator(){
+    const el=document.getElementById('ppt-current-label');if(!el)return;
+    const slide=slides[idx];
+    const totalSteps=slide&&slide.dataset.animate==='pipeline'?slide.querySelectorAll('[data-anim="step"]').length:0;
+    el.textContent=`${idx+1} / ${total}${totalSteps?` · 动画 ${pipeStep+1}/${totalSteps}`:''}`;
   }
   function handleKey(e){
     const editable=e.target?.matches?.('input,textarea,[contenteditable="true"]');
@@ -2005,7 +2029,7 @@ window.__pptPresenter=(()=>{
     if(key==='f'){e.preventDefault();setScreenMode(audienceFrozen?'normal':'frozen');return true;}
     if(key==='a'){e.preventDefault();toggleAutoAdvance();return true;}
     if(key==='r'){e.preventDefault();toggleRehearsal();return true;}
-    if(['ArrowRight','PageDown',' ','ArrowDown'].includes(e.key)){e.preventDefault();go(idx+1,{force:true});return true;}
+    if(['ArrowRight','PageDown',' ','ArrowDown'].includes(e.key)){e.preventDefault();if(tryPipeAdvance())return true;go(idx+1,{force:true});return true;}
     if(['ArrowLeft','PageUp','ArrowUp'].includes(e.key)){e.preventDefault();go(idx-1,{force:true});return true;}
     if(e.key==='Home'){e.preventDefault();go(0,{force:true});return true;}
     if(e.key==='End'){e.preventDefault();go(total-1,{force:true});return true;}
@@ -2102,7 +2126,9 @@ if(motion){
   document.body.classList.add('motion-ready');
   const EASE = [.22, 1, .36, 1];
   const slides = [...document.querySelectorAll('.slide')];
+  const IS_PREVIEW = new URLSearchParams(location.search).get('mode') === 'preview';
   let pipeStep = -1;
+  let pipePending = -1;
   let lastIdx = -1;
 
   function resetAnims(slide){
@@ -2121,6 +2147,30 @@ if(motion){
     });
   }
 
+  // 把管道页点亮到第 step 步：正常模式最新一步用动画、其余直接置位；
+  // 低功耗（预览）下用 important 覆盖 .low-power 全显规则，静态逐步置位。
+  function applyPipeStep(slide, step){
+    const steps  = [...slide.querySelectorAll('[data-anim="step"]')];
+    const arrows = [...slide.querySelectorAll('[data-anim="arrow"]')];
+    for(let i=0;i<=step;i++){
+      if(steps[i]){
+        if(i===step && !window.__lowPowerMode){
+          animate(steps[i], {opacity:[0.15,1], y:[8,0]}, {duration:.5, easing:EASE});
+        }else{
+          if(window.__lowPowerMode) steps[i].style.setProperty('opacity','1','important');
+          else steps[i].style.opacity='1';
+          steps[i].style.transform='none';
+        }
+      }
+      if(i>0 && arrows[i-1]) arrows[i-1].style.opacity='0.7';
+    }
+  }
+  function setPipeStep(step){
+    pipePending = step;
+    const slide = slides[lastIdx];
+    if(slide && slide.dataset.animate === 'pipeline') applyPipeStep(slide, step);
+  }
+
   function playSlide(i){
     const slide = slides[i];
     if(!slide) return;
@@ -2128,7 +2178,18 @@ if(motion){
     const recipe = slide.dataset.animate || (slide.classList.contains('hero') ? 'hero' : 'cascade');
 
     if(window.__lowPowerMode){
+      if(recipe === 'pipeline' && IS_PREVIEW){
+        // 预览模式：管道页保持暗淡分步状态，由 __setPipeStep 逐段点亮
+        pipeStep = -1;
+        slide.querySelectorAll('[data-anim]').forEach(el=>{
+          el.style.setProperty('opacity','0.15','important');
+          el.style.transform='none';
+        });
+        if(pipePending > -1) applyPipeStep(slide, pipePending);
+        return;
+      }
       revealStatic(slide);
+      pipePending = -1;
       return;
     }
 
@@ -2138,9 +2199,11 @@ if(motion){
         el.style.opacity='0.15';
         el.style.transform='none';
       });
+      if(pipePending > -1) applyPipeStep(slide, pipePending);
       return;
     }
 
+    pipePending = -1;
     resetAnims(slide);
     const all = [...slide.querySelectorAll('[data-anim]')];
     if(!all.length) return;
@@ -2191,6 +2254,7 @@ if(motion){
 
   window.__playSlide = playSlide;
   window.__pipeAdvance = pipeAdvance;
+  window.__setPipeStep = setPipeStep;
 
   // 首屏:go() 已跑过(同步),没来得及触发动效 → 这里补一下(尊重 ?slide=N)
   playSlide(window.__currentSlideIndex || 0);
