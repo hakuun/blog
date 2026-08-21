@@ -1,0 +1,43 @@
+---
+import { SITE_BASE } from '@/consts'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import FormattedDate from '../../components/FormattedDate.astro'
+import { ppts } from '../../data/ppts'
+
+const sortedPpts = [...ppts].sort((a, b) => b.date.valueOf() - a.date.valueOf())
+---
+
+<BaseLayout title="PPT | Hakuun Blog" description="Hakuun 的网页演示分享">
+	<main class="app-container pt-36">
+		<h1 class="text-6xl pb-8 font-bold">PPT</h1>
+		<p class="md:w-2/3 text-lg leading-[2rem]">
+			这里收录我做的网页演示，以横向翻页 PPT 的形式呈现，适合分享和演讲。
+		</p>
+	</main>
+	<section class="app-container py-12">
+		<ul class="posts-grid-container">
+			{
+				sortedPpts.map((ppt) => (
+					<li>
+						<a
+							href={`${SITE_BASE}/ppt/${ppt.slug}/`}
+							class="flex flex-col gap-4 pb-8 h-full group transition-colors"
+						>
+							<h4
+								class="text-2xl font-semibold group-hover:text-primary dark:group-hover:text-primary-dark group-hover:underline transition-colors"
+							>
+								{ppt.title}
+							</h4>
+							<p class="line-clamp-3 opacity-80">
+								{ppt.description}
+							</p>
+							<p class="uppercase text-sm mt-auto tracking-tight">
+								<FormattedDate date={ppt.date} />
+							</p>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+</BaseLayout>
